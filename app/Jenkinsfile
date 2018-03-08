@@ -1,0 +1,32 @@
+node {
+    def app
+
+    stage('Clonar repositorio.') {
+        /* Clonaremos el repositorio en nuestro espacio de trabajo. */
+        checkout scm
+    }
+
+    stage('Construir imagen.') {
+        /* Construcción de la imagen actual, es análogo a la 
+        instrucción build de la línea de comandos de Docker*/
+        app = docker.build("entregacontinua/nodehola")
+    }
+
+    stage('Ejecución de pruebas.') {
+      /* Ejecutaremos el framework de testing para nuestra imagen. */
+        app.inside {
+            sh 'echo "Tests passed"'
+        }
+    }
+
+    stage('Push de imagen al registro de Docker.') {
+        /* Finally, we'll push the image with two tags:
+         * First, the incremental build number from Jenkins
+         * Second, the 'latest' tag.
+         * Pushing multiple tags is cheap, as all the layers are reused. */
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+        }
+    }
+}
