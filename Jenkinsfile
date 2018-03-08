@@ -9,7 +9,7 @@ node {
     stage('Construir imagen.') {
         /* Construcción de la imagen actual, es análogo a la 
         instrucción build de la línea de comandos de Docker*/
-        app = docker.build("testing-repo/nodehola")
+        app = docker.build("rokokito/nodehola")
     }
 
     stage('Ejecución de pruebas.') {
