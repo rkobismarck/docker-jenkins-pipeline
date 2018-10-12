@@ -42,7 +42,7 @@ The Dockerfile is intended to be used when you're building a docker image, and y
   * Accept the confirmation pop up.
   * Save the private key file on you local directory and give a meaningful name to the file.
   * Leave empty the passphrase box, and confirm that is your desire to leave it empty when prompted.
-13. We are going to configure a software that allow us to connect via SSH to our AWS Instance, in my case and due to the lack of a Windows computer rigth now, i¡m going to configure a Termius session on a Mac.
+13. We are going to configure a software that allow us to connect via SSH to our AWS Instance, in my case and due to the lack of a Windows computer rigth now, i'm going to configure a Termius session on a Mac.
 14. Open up Termius sofware and configure your SSH session.
 15. Click on the down arrow and select option => Keychain.
  ![alt text](https://github.com/rkobismarck/docker-jenkins-pipeline/blob/master/media-content/aws-11.1.png "Termius")
@@ -61,61 +61,69 @@ The Dockerfile is intended to be used when you're building a docker image, and y
 ![alt text](https://github.com/rkobismarck/docker-jenkins-pipeline/blob/master/media-content/aws-18.png "Termius")
 22. Click connect and we're up and running on your AWSEC2 instance.
 ![alt text](https://github.com/rkobismarck/docker-jenkins-pipeline/blob/master/media-content/aws-19.png "Termius")
-Let's install Docker in our Ubuntu AWSEC2 instance.
-23. The simplest way to get installed DockerCE on your system:
+
+
+## Jenkins inside AWS's EC2.
+1. Login into the instance that you've recently created.
+2. Make sure to verify which version of Java is on your SO, make sure to install the Oracle's Java version.
+3. Once in the console, let's have some fun and update the apt-get
 ```console
-ubuntu@ip-172-31-36-168:~$ curl -sSL https://get.docker.com/ | sh
+ubuntu@ip-172-31-35-221:~$ sudo apt-get update
 ```
-24. After installing Docker let's create a Unix group docker and add your current user.
+4. Let's add to our repositories list the Oracle's PPA.
 ```console
-ubuntu@ip-172-31-36-168:~$ groupadd docker
+sudo add-apt-repository ppa:webupd8team/java
+
 ```
-25. Add your user to the docker group.
+5. Once in the console, let's have some fun and update the apt-get
 ```console
-sudo usermod -aG docker $USER
+ubuntu@ip-172-31-35-221:~$ sudo apt-get update
 ```
-26. Reboot your instance and after the restart connect it again. 
-![alt text](https://github.com/rkobismarck/docker-jenkins-pipeline/blob/master/media-content/aws-20.png "AWS Reboot")
-27. Just after the reboot, double check the procedure with the next command you must have an output simmilar to this one, otherwise retry step 25.
+6. Let's install the latest version of Oracle's Java. Note: It's recomendable to install the JDK to avoid any issues about possible configurations in the Jenkins server.
 ```console
-ubuntu@ip-172-31-36-168:~$ docker ps
-CONTAINER ID        IMAGE               
-COMMAND             CREATED             
-STATUS              PORTS               
-NAMES
-ubuntu@ip-172-31-36-168:~$ 
+ubuntu@ip-172-31-35-221:~$ sudo apt-get install oracle-java8-installer
 ```
-28. We're going to run a Jenkin's instance using docker, with the next command:
+7. Let's verify that you're running by default with the Oracle's version of Java.
 ```console
-ubuntu@ip-172-31-36-168:~$ docker container run -d -p 8080:8080 jenkins
-Unable to find image 'jenkins:latest' locally
-latest: Pulling from library/jenkins
-3e731ddb7fc9: Pull complete 
-47cafa6a79d0: Pull complete 
-79fcf5a213c7: Pull complete 
-68e99216b7ad: Pull complete 
-0e688b2d7215: Pull complete 
-b3e9ec3ed749: Pull complete 
-dcd3ba267864: Pull complete 
-5672be24157f: Pull complete 
-8c5307d6ff27: Pull complete 
-d30b5c69f2b9: Pull complete 
-da261a9c5016: Pull complete 
-50ef9f1d2201: Pull complete 
-997a5a8696f1: Pull complete 
-1605539b4940: Pull complete 
-a78e3b0e6f48: Pull complete 
-eba55850699d: Pull complete 
-49ac780bca8b: Pull complete 
-f7d0cbfa302c: Pull complete 
-dc2c874404c1: Pull complete 
-51776d145070: Pull complete 
-Digest: sha256:611fd69478bd2c284479669cbaaeabd45c5d866c1d14ea67adfaff5a61a5f4a9
-Status: Downloaded newer image for jenkins:latest
-d113167ac0e303d2917fbb6de7a65e44380523440cb4dd0acbadb8cd61148736
-ubuntu@ip-172-31-36-168:~$ docker ps
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                               NAMES
-d113167ac0e3        jenkins             "/bin/tini -- /usr/l…"   11 seconds ago      Up 10 seconds       0.0.0.0:8080->8080/tcp, 50000/tcp   pensive_hermann
+ubuntu@ip-172-31-35-221:~$ sudo update-alternatives --config java
+```
+![alt text](https://github.com/rkobismarck/docker-jenkins-pipeline/blob/master/media-content/jenkins-1.png "Java Options")
+
+8. Let's start installing our Jenkins server inside our Ubuntu's SO.
+
+9. We're going to add the repository key to our system.
+```console
+wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
 ```
 
-# docker-jenkins-pipeline
+10. Modify our source.list, append the next URL.
+```console
+echo deb https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list
+```
+
+11. Perform an update on our apt-get, please:
+```console
+sudo apt-get update
+```
+
+12. Let's install our Jenkins:
+```console
+sudo apt-get install jenkins
+```
+13. Let's start our Jenkins instance.
+```console
+sudo systemctl start jenkins
+```
+
+14. Verify that Jenkins started correctly:
+```console
+sudo systemctl status jenkins
+```
+![alt text](https://github.com/rkobismarck/docker-jenkins-pipeline/blob/master/media-content/jenkins-2.png "Jenkins Started")
+
+15. Let's take a look about our newest Jenkis installation, open a browser and goes to your AWSEC2 ip address + Port; 127.0.0.1:8080,
+you'll see your instance runnning like this one:
+![alt text](https://github.com/rkobismarck/docker-jenkins-pipeline/blob/master/media-content/jenkins-3.png "Jenkins Welcome")
+
+
+
