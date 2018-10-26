@@ -16,7 +16,7 @@ The Dockerfile is intended to be used when you're building a docker image, and y
 
 
 ### Let's get start with this.
-1. First of all you have two choices, [clone](https://github.com/rkobismarck/hobbyApp.git) this repository with the source code and avoid writting your own Dockerfile,Jenkinsfile and SourceCode by having this approach you'll be focusing only on the related infrastructure setup involving Jenkins-Docker-AWS or just start from the begining creating your own repo and of course adding your desired source code, Dockerfile and Jenkinsfile that's your choice.
+1. First of all you have two choices, [clone](https://github.com/rkobismarck/docker) this repository with the source code and avoid writting your own Dockerfile,Jenkinsfile and SourceCode by having this approach you'll be focusing only on the related infrastructure setup involving Jenkins-Docker-AWS or just start from the begining creating your own repo and of course adding your desired source code, Dockerfile and Jenkinsfile that's your choice.
 2. Create an account [here](https://hub.docker.com/) in the Docker registry and take note about the credentials, we'll need'em in foreward steps. 
 3. Create a free account on AWS just register yourself [here](https://aws.amazon.com/free/).
 4. Sign in AWS and go to: Console => _Build a solution_ and look for the option _Launch a virtual machine with **EC2**_.[AWS EC2 Overview](https://aws.amazon.com/ec2/)
