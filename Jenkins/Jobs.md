@@ -12,7 +12,7 @@ You have knowledge about the IP of your AWS Instance, and you have at least acce
 1. Go to the URL assigned to our Jenkins server, using your browser.
 This means, go to: http://34.235.160.124:8080
 Note: Replace the IP address by the assigned to your own instance, you'll be able to find this in the AWS Console like the following image:
-![alt text](https://github.com/rkobismarck/docker-jenkins-pipeline/blob/master/media-content/jenkins-config-1.png "Jenkins Welcome Configuration") 
+![alt text](https://github.com/rkobismarck/docker-jenkins-pipeline/blob/master/media-content/aws-15.png "Jenkins Welcome Configuration") 
 
 2. Login, using your user and password.
 ![alt text](https://github.com/rkobismarck/docker-jenkins-pipeline/blob/master/media-content/jenkins-job-1.png "Jenkins Login Screen")  

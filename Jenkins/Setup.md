@@ -13,7 +13,7 @@ Idem.
 1. Open a browser window and go to the direction that was assigned to your Jenkins instance, based on your AWS Instance direction.
 This means, go to: http://54.145.171.157:8080
 Note: Replace the IP address by the assigned to your own instance, you'll be able to find this in the AWS Console like the following image:
-![alt text](https://github.com/rkobismarck/docker-jenkins-pipeline/blob/master/media-content/jenkins-config-1.png "Jenkins Welcome Configuration")
+![alt text](https://github.com/rkobismarck/docker-jenkins-pipeline/blob/master/media-content/aws-15.png "Jenkins Welcome Configuration")
 
 2. Open your ssh terminal, and connect to the server please:
 3. Once inside, go to the path that's required by your Jenkins installation we're going to retrieve our secret password.
