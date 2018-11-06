@@ -6,7 +6,13 @@ if [ "$1" != "" ]; then
 
     if [ "$1" == "stop" ]; then
     	COMMAND="stop-instances"
-	fi		
+	fi
+
+	if [ "$1" == "state" ]; then
+    	COMMAND="describe-instances"
+	fi
+
+
 else
     echo "Non valid argument was supplied, please try again with: start, stop."
     exit
