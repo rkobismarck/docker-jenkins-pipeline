@@ -8,7 +8,7 @@ if [ "$1" != "" ]; then
     	COMMAND="stop-instances"
 	fi		
 else
-    echo "No valid argument was supplied, please try again with: start, stop."
+    echo "Non valid argument was supplied, please try again with: start, stop."
     exit
 fi
 
