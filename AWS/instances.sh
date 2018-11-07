@@ -1,4 +1,12 @@
 #!/bin/bash
+
+function usage {
+    echo "usage: ./instances.sh [action] [config-file]"
+    echo "  	 [action] start,stop,state"
+    echo "  	 [config] valid route to a config file"
+    exit 1
+}
+
 if [ "$1" != "" ]; then
     if [ "$1" == "start" ]; then
     	COMMAND="start-instances"
@@ -12,10 +20,8 @@ if [ "$1" != "" ]; then
     	COMMAND="describe-instances"
 	fi
 
-
 else
-    echo "Non valid argument was supplied, please try again with: start, stop."
-    exit
+    usage
 fi
 
 if [ "$2" != "" ] && [ -e "$2" ] ; then
@@ -26,5 +32,5 @@ if [ "$2" != "" ] && [ -e "$2" ] ; then
 		aws ec2 $COMMAND --instance-ids $INSTANCEID
 	done < "$FILENAME"
 else
-	echo "Non valid server configuration file was supplied, please valid that you select a valid configuration file for the process.."
+	usage
 fi
