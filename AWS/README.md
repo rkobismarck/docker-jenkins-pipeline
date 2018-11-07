@@ -37,4 +37,4 @@ And because of that, we're going to have a execution line like the next one:
 MacBook-Pro-de-Roberto:AWS robertotrujillo$ ./instances.sh state servers.txt
 ```
 
-The result, we're going to perform in base of the selected action, the same action for all the instancesId that are present in the servers.txt configuration file that you provide in the execution argument.
+The result, we're going to perform in base of the selected action, the same action for all the instancesId that are present in the servers.txt configuration file that you have provide in the execution argument.
