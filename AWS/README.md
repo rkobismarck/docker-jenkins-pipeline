@@ -29,6 +29,7 @@ You can continue adding **actions** as you wish, this is going to help you about
 At this point, you have to provide a configuration file, which contains the list of instances_ids, that we'll be targeting. The file itself contains instancesIds separated by a break line.
 
 ![alt text](https://github.com/rkobismarck/docker-jenkins-pipeline/blob/master/media-content/aws-configuration-1.png "AWS Server Configuration")
+
 Note: You can name your configuration file as you wish, and even you can have several configuration files, this provides you with a powerful tool for handling complex environments.
 
 And because of that, we're going to have a execution line like the next one:
