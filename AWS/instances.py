@@ -18,10 +18,11 @@ def usage():
 def doesThisFileExist(fileName):
 	return os.path.isfile(fileName)
 
-def validateLengthInputArgs(argument):
-	if len(argument) < PARAMETER_ACTION:
-		return False
-	return True
+def isAValidInputLength(argument):
+	print len(argument)
+	if len(argument) == PARAMETER_MINIMUM_ARGS:
+		return True
+	return False
 
 def assignActionValueForAWS(action):
 	if action == "start":
@@ -41,7 +42,7 @@ def executeCommand(command):
 def executeAWSCommand(instanceId,command):
 	return executeCommand(assemblyAWSCommand(instanceId,command))
 
-if validateLengthInputArgs(sys.argv) == False:
+if isAValidInputLength(sys.argv) == False:
 	usage()
 
 action = assignActionValueForAWS(str(sys.argv[PARAMETER_ACTION]))
