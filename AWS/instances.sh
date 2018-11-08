@@ -4,6 +4,7 @@ function usage {
     echo "usage: ./instances.sh [action] [config-file]"
     echo "  	 [action] start,stop,state"
     echo "  	 [config] valid route to a config file"
+    echo "Something like this :)! -> ./instances.sh start servers.txt"
     exit 1
 }
 
