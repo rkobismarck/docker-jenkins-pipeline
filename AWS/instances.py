@@ -19,7 +19,6 @@ def doesThisFileExist(fileName):
 	return os.path.isfile(fileName)
 
 def isAValidInputLength(argument):
-	print len(argument)
 	if len(argument) == PARAMETER_MINIMUM_ARGS:
 		return True
 	return False
@@ -42,13 +41,13 @@ def executeCommand(command):
 def executeAWSCommand(instanceId,command):
 	return executeCommand(assemblyAWSCommand(instanceId,command))
 
-if isAValidInputLength(sys.argv) == False:
+if not isAValidInputLength(sys.argv):
 	usage()
 
 action = assignActionValueForAWS(str(sys.argv[PARAMETER_ACTION]))
 config = os.path.dirname(os.path.realpath(__file__))+"/" + str(sys.argv[PARAMETER_CONFIG_FILE])
 
-if doesThisFileExist(config)	==	False:
+if not doesThisFileExist(config):
 	usage()
 
 with open(config) as f:
