@@ -3,7 +3,7 @@ import sys
 import os
 import subprocess
 
-PARAMETER_ACTION         = 1;
+PARAMETER_ACTION        = 1;
 PARAMETER_CONFIG_FILE 	 = 2;
 PARAMETER_MINIMUM_ARGS	 = 3;
 
